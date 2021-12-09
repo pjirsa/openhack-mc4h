@@ -51,7 +51,7 @@ Modify the **Authority** and **ClientId** values to match your FHIR API instance
 
 ```  "AzureAd": {
     "Authority": "https://login.microsoftonline.com/[your tenant id]",
-    "ClientId": "[your Client secret]",
+    "ClientId": "[your Client Id]",
     "ValidateAuthority": true
   },
 Modify the **Scope** and **FhirServerUri** values to match your FHIR API instance.
@@ -62,33 +62,33 @@ Modify the **Scope** and **FhirServerUri** values to match your FHIR API instanc
   }, 
   ```
   
-If you want to see where the application reads these values from the appsettings.json file
-+ Look in the Program.cs file._Build and run FhirBlaze  <br> 
-+ Log in with your Active Directory account. <br> 
-_The navigation menu items in the left-hand pane are some of the core entities we’ve already developed._ 
+If you want to see where the application reads these values from the appsettings.json file, look in the _Program.cs_ file.
+- Build and run FhirBlaze
+- Log in with your Active Directory account.
+
+The navigation menu items in the left-hand pane are some of the core entities we’ve already developed.
 + Click on any navigation menu items in the left-hand pane (e.g. Patients or Practitioners)  <br> 
 + Stop running FhirBlaze
-<br>
-FhirBlaze out of the box is set up to interact with the Patient, Practitioner, and Questionaire Fhir resources. As you build solutions, you will likely need to add resource types.
-<br>
-<br>
-Let's see how to add a new module. This adds a new Fhir resource type that we can create or delete using FhirBlaze. <br>
-<br>
 
-Open **Solution Explorer** pane and continue on to Step 2. <br> 
+FhirBlaze out of the box is set up to interact with the Patient, Practitioner, and Questionaire Fhir resources. As you build solutions, you will likely need to add resource types.
 
 ## Step 2 – Create a new module
-Select a resource from [FHIR.org] (https://www.hl7.org/fhir/resourcelist.html) that is not already included as a module in the FhirBlaze solution. <br> 
-In **Solution Explorer**, right-click the **FhirBlaze** solution, select **Add**, and then select **New Project…**  <br> 
-In the **Add a new project** dialog, set the language filter to **C#**, and then select **Class Library** in the list of project templates. <br> 
+Let's see how to add a new module. This adds a new Fhir resource type that we can create or delete using FhirBlaze. <br>
+
+Select a resource from [FHIR.org] (https://www.hl7.org/fhir/resourcelist.html) that is not already included as a module in the FhirBlaze solution.
+
+1. Open **Solution Explorer** pane.
+
+1. In **Solution Explorer**, right-click the **FhirBlaze** solution, select **Add**, and then select **New Project…**
+1. In the **Add a new project** dialog, set the language filter to **C#**, and then select **Class Library** in the list of project templates. <br> 
 _Be sure it is a C# Class Library and doesn’t say Universal Windows or .NET Framework behind Class Library._  <br> 
-Click the **Next** button.  <br> 
-In the **Project Name** text box, enter **FhirBlaze.[name of your selected FHIR resource]Module**.  <br> 
-Click the **Next** button.  <br> 
-Confirm **.NET 5.0** is selected and click the **Create** button.  <br> 
-Right-click the **FhirBlaze** project, select **Add**, and then select **Project Reference**.  <br> 
-Select the name of the module you just added to the solution.   <br> 
-In **Solution Explorer**, open **App.razor** and add your new module to the list of assemblies.  <br>  
+1. Click the **Next** button.  <br> 
+1. In the **Project Name** text box, enter **FhirBlaze.[name of your selected FHIR resource]Module**.  <br> 
+1. Click the **Next** button.  <br> 
+1. Confirm **.NET 5.0** is selected and click the **Create** button.  <br> 
+1. Right-click the **FhirBlaze** project, select **Add**, and then select **Project Reference**.  <br> 
+1. Select the name of the module you just added to the solution.   <br> 
+1. In **Solution Explorer**, open **App.razor** and add your new module to the list of assemblies.  <br>  
 ```
 @code {
     private IList<Assembly> AdditionalAssemblies = new[]
@@ -101,17 +101,13 @@ In **Solution Explorer**, open **App.razor** and add your new module to the list
 }
 ```
 
-_Adding your assembly here means the assembly will lazy-load – or only load when it’s needed. By lazy-loading assemblies, we keep the application size smaller for end users that may only use a small number of our application’s pages._  <br>  
-<br>
-
 Now let's add it to the UI. <br>
 <br>
 
-In **Solution Explorer**, expand the **Shared** folder, and open **NavMenu.razor**.
-Highlight and copy the last of the list items and paste it within the unordered list. 
-Change the **NavLink** element’s **href** property to the plural name of your selected FHIR resource (e.g. practioners).  <br>  
-Change the text after the <span> element to the plural name of your FHIR resource. (e.g. Practitioners)  <br>  
-Change the 
+1. In **Solution Explorer**, expand the **Shared** folder, and open **NavMenu.razor**.
+1. Highlight and copy the last of the list items and paste it within the unordered list. 
+1. Change the **NavLink** element’s **href** property to the plural name of your selected FHIR resource (e.g. practioners).  <br>  
+1. Change the text after the <span> element to the plural name of your FHIR resource. (e.g. Practitioners)  <br>  
     
 ```   
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
